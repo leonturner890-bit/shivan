@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Heartline | Private chat space for couples</title>
+<meta name="description" content="A private couples app for long distance relationships: chat, send love notes and count down to your anniversary.">
+<meta property="og:title" content="Heartline: where two hearts talk">
+<meta property="og:description" content="Your private couple space for chat, love notes and shared memories.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28'%3E%E2%99%A5%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="nav">
+  <a class="logo" href="#top">Heartline</a>
+  <nav><a href="#how">How it works</a><a href="#app">Log in</a><a class="btn" href="#app">Sign up</a></nav>
+</header>
+<main>
+  <section class="hero" id="top">
+    <canvas id="hearts" aria-hidden="true"></canvas>
+    <div class="hero-in">
+      <h1 aria-label="Where two hearts talk."><span id="type" aria-hidden="true"></span></h1>
+      <p>A private space for two. Chat, leave love notes, and count down to the days that matter.</p>
+      <p><a class="btn" href="#app">Start Your Love Story</a> <a class="btn ghost" href="#how">See How It Works</a></p>
+      <p><span class="pulse" aria-hidden="true">♥</span> <b id="count">0</b> messages sent today</p>
+    </div>
+  </section>
+
+  <section id="how">
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><b>Sign up.</b> It takes a minute.</li>
+      <li><b>Invite your partner.</b> Share your private code.</li>
+      <li><b>Start talking.</b> Only the two of you can see your space.</li>
+    </ol>
+  </section>
+
+  <section id="app">
+    <div id="auth" class="card">
+      <h2>Start your love story</h2>
+      <form id="authForm">
+        <input id="name" aria-label="Your first name" placeholder="Your first name" autocomplete="given-name" hidden>
+        <input id="email" type="email" aria-label="Email" placeholder="Email" autocomplete="email" required>
+        <input id="pw" type="password" aria-label="Password" placeholder="Password (8+ characters)" autocomplete="current-password" minlength="8" required>
+        <p id="authErr" class="err" role="alert"></p>
+        <button class="btn" id="authBtn">Log in</button>
+        <button class="link" id="swap" type="button">New here? Sign up</button>
+      </form>
+    </div>
+
+    <div id="pair" class="card" hidden>
+      <h2>Invite your partner</h2>
+      <p>Create a code and send it to them, or enter the code they sent you.</p>
+      <button class="btn" id="invite">Create my code</button>
+      <p>Your code: <b id="code"></b></p>
+      <button class="link" id="again" type="button">My partner has joined</button>
+      <form id="joinForm">
+        <input id="joinCode" aria-label="Partner's code" placeholder="Enter your partner's code" required>
+        <p id="pairErr" class="err" role="alert"></p>
+        <button class="btn">Join their space</button>
+      </form>
+    </div>
+
+    <div id="chat" class="card" hidden>
+      <div class="chat-head"><h2 id="who"></h2><button class="btn" id="premium">Go Premium</button></div>
+      <div id="log" role="log" aria-live="polite"></div>
+      <form id="send"><input id="text" aria-label="Message" placeholder="Type a message…" maxlength="2000" autocomplete="off"><button class="btn">Send</button></form>
+    </div>
+  </section>
+</main>
+<footer><p>© Heartline · <a href="#top">Privacy</a> · <a href="#top">Terms</a></p></footer>
+<script src="/socket.io/socket.io.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
