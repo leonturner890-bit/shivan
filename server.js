@@ -10,6 +10,12 @@ const SECRET = process.env.JWT_SECRET;
 if (!SECRET) throw new Error('Set JWT_SECRET in .env');
 const prod = process.env.NODE_ENV === 'production';
 
+// First start: create the tables from schema.sql if they don't exist yet
+(async () => {
+  const { rows } = await db.query("SELECT to_regclass('public.users') AS t");
+  if (!rows[0].t) await db.query(require('fs').readFileSync(__dirname + '/schema.sql', 'utf8'));
+})().catch(e => { console.error('Schema setup failed:', e); process.exit(1); });
+
 const app = express(), server = http.createServer(app), io = new Server(server);
 app.set('trust proxy', 1);
 app.use(helmet());
